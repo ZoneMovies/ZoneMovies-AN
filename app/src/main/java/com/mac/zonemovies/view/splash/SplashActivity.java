@@ -1,11 +1,10 @@
 package com.mac.zonemovies.view.splash;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.mac.zonemovies.R;
-import com.mac.zonemovies.view.MainActivity;
+import com.mac.zonemovies.view.home.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,11 +16,16 @@ public class SplashActivity extends AppCompatActivity {
         // -- has the user been onBoarded
         // we would start background tasks
         // handle navigation
-        navigateToRelevantScreen();
+        navigateToHome();
     }
 
-    private void navigateToRelevantScreen() {
-        startActivity(new Intent(this, MainActivity.class));
+    private void navigateToHome() {
+        startActivity(HomeActivity.startHomeActivity(this));
+        finish();
+    }
+
+    private void navigateToOnBoarding() {
+
         finish();
     }
 
