@@ -1,5 +1,4 @@
-
-package com.example;
+package com.mac.zonemovies.data.remote.movieapi.to;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

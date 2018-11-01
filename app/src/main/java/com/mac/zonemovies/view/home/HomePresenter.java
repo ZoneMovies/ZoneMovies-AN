@@ -1,6 +1,7 @@
 package com.mac.zonemovies.view.home;
 
 import com.mac.zonemovies.data.remote.movieapi.MovieService;
+import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,21 +31,22 @@ public class HomePresenter implements HomeContract.Presenter {
     public void getMovies() {
         movieService.getMovieList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<String>>() {
+                .subscribe(new Observer<NowShowingResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        // this is added since rxjava
+                        // left blank
                     }
 
                     @Override
-                    public void onNext(List<String> strings) {
-                        homeView.showMovies(strings);
+                    public void onNext(NowShowingResponse nowShowingResponse) {
+                        // log analytics request
+                        homeView.showMovies(nowShowingResponse.getResults());
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        // log productive error
                         e.printStackTrace();
-                        /// log to crash report
                     }
 
                     @Override
@@ -53,4 +55,5 @@ public class HomePresenter implements HomeContract.Presenter {
                     }
                 });
     }
+
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
+import com.mac.zonemovies.data.remote.movieapi.to.Result;
 
 import java.util.List;
 
@@ -39,9 +40,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     }
 
     @Override
-    public void showMovies(List<String> movies) {
-        for(String movie:movies) {
-            Log.d(TAG, "showMovies: " + movie);
+    public void showMovies(List<Result> results ) {
+        for(Result movie:results) {
+            Log.d(TAG, "showMovies: " + movie.getTitle());
         }
     }
 }
