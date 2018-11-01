@@ -4,7 +4,7 @@ import android.app.Application;
 
 public class ZoneMoviesApp extends Application {
 
-    private AppComponent appComponent;
+    private static AppComponent appComponent;
 
     @Override
     public void onCreate() {
@@ -16,6 +16,10 @@ public class ZoneMoviesApp extends Application {
                 .builder()
                 .appModule(new AppModule(this))
                 .build();
+    }
+
+    public static AppComponent getAppComponent() {
+        return appComponent;
     }
 
 }
