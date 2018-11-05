@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.mac.zonemovies.R;
@@ -18,6 +20,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     private static final String TAG = "HomeActivityTAG";
 
+    private RecyclerView moviesRecycler;
+    private HomeAdapter homeAdapter;
+
     @Inject
     HomePresenter homePresenter;
 
@@ -29,6 +34,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        initViews();
 
         DaggerHomeComponent.builder()
                 .appComponent(ZoneMoviesApp.getAppComponent())
@@ -41,8 +47,16 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     @Override
     public void showMovies(List<Result> results ) {
+        homeAdapter.updateDataSet(results);
         for(Result movie:results) {
-            Log.d(TAG, "showMovies: " + movie.getTitle());
+            Log.d(TAG, "showMovies: " + movie.getPosterPath());
         }
+    }
+
+    private void initViews(){
+        moviesRecycler = findViewById(R.id.moviesRecycler);
+        homeAdapter = new HomeAdapter();
+        moviesRecycler.setAdapter(homeAdapter);
+        moviesRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
 }
