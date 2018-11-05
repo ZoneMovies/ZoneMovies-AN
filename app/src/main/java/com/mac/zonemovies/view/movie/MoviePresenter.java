@@ -2,6 +2,7 @@ package com.mac.zonemovies.view.movie;
 
 import com.mac.zonemovies.data.remote.movieapi.MovieService;
 import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
+import com.mac.zonemovies.util.resources.StringManager;
 
 import java.net.UnknownHostException;
 
@@ -16,8 +17,12 @@ import retrofit2.HttpException;
 public class MoviePresenter implements MovieContract.Presenter {
 
     private static final String TAG = "MoviePresenterTAG";
+
     @Inject
     MovieService movieService;
+
+    @Inject
+    StringManager stringManager;
 
     private final MovieContract.View movieView;
 
@@ -28,7 +33,6 @@ public class MoviePresenter implements MovieContract.Presenter {
 
     @Override
     public void getMovie(int movieId) {
-        movieId = -1;
         movieService.getMovie(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -66,13 +70,7 @@ public class MoviePresenter implements MovieContract.Presenter {
     }
 
     private void handleHttpError(HttpException e) {
-        switch (e.code()) {
-            case 404:
-                movieView.showError("Movie not found");
-                break;
-            default:
-                movieView.showError("API Backend error");
-        }
+        movieView.showError(stringManager.getErrorMessage(e.code()));
     }
 
 }
