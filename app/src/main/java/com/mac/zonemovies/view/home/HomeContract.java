@@ -9,6 +9,8 @@ public interface HomeContract {
     interface View {
         // TODO - Define view responsibility
         void showMovies(List<Result> results );
+
+        void navigateToMovie(int movieId);
     }
 
 

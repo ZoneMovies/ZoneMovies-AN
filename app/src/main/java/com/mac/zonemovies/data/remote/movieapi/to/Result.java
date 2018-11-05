@@ -161,4 +161,8 @@ public class Result {
         this.releaseDate = releaseDate;
     }
 
+    public String getPosterURL() {
+        return "https://image.tmdb.org/t/p/w500/"+posterPath;
+    }
+
 }
