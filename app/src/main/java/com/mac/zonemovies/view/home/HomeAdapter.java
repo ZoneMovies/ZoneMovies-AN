@@ -1,6 +1,5 @@
 package com.mac.zonemovies.view.home;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.data.remote.movieapi.to.Result;
-import com.mac.zonemovies.view.movie.MovieActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,7 +19,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private static final String TAG = "HomeAdapter_TAG";
 
+    private final HomeContract.View homeView;
+
     private List<Result> results;
+
+    public HomeAdapter(HomeContract.View homeView) {
+        this.homeView = homeView;
+    }
 
     @NonNull
     @Override
@@ -54,14 +58,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        final Context context;
         ImageView moviePoster;
         TextView movieTitle;
 
         ViewHolder(View itemView) {
             super(itemView);
-            context = itemView.getContext();
             moviePoster = itemView.findViewById(R.id.moviePoster);
             movieTitle = itemView.findViewById(R.id.movieTitle);
             itemView.setOnClickListener(this);
@@ -69,8 +70,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            Log.d(TAG, "onClick: clicked " + getAdapterPosition());
-            context.startActivity(MovieActivity.startMovieActivity(itemView.getContext()));
+            homeView.navigateToMovie(results.get(getAdapterPosition()).getId());
         }
     }
 

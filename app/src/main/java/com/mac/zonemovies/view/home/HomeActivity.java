@@ -11,6 +11,7 @@ import android.util.Log;
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
 import com.mac.zonemovies.data.remote.movieapi.to.Result;
+import com.mac.zonemovies.view.movie.MovieActivity;
 
 import java.util.List;
 
@@ -53,9 +54,14 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         }
     }
 
+    @Override
+    public void navigateToMovie(int movieId) {
+        startActivity(MovieActivity.startMovieActivity(this, movieId));
+    }
+
     private void initViews(){
         moviesRecycler = findViewById(R.id.moviesRecycler);
-        homeAdapter = new HomeAdapter();
+        homeAdapter = new HomeAdapter(this);
         moviesRecycler.setAdapter(homeAdapter);
         moviesRecycler.setLayoutManager(new LinearLayoutManager(this));
     }

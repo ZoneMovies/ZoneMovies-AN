@@ -9,8 +9,12 @@ import com.mac.zonemovies.R;
 
 public class MovieActivity extends AppCompatActivity implements MovieContract.View {
 
-    public static Intent startMovieActivity(Context context) {
-        return new Intent(context, MovieActivity.class);
+    private static final String MOVIE_ID_EXTRA = "com.mac.zonemovies.view.movie.MOVIE_ID_EXTRA";
+
+    public static Intent startMovieActivity(Context context, int movieId) {
+        Intent movieIntent = new Intent(context, MovieActivity.class);
+        movieIntent.putExtra(MOVIE_ID_EXTRA, movieId);
+        return movieIntent;
     }
 
     @Override
