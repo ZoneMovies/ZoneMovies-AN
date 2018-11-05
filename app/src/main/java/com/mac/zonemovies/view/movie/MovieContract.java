@@ -1,14 +1,20 @@
 package com.mac.zonemovies.view.movie;
 
+import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
+
 public interface MovieContract {
 
     interface View {
-        // TODO - Define view responsibility
+        void showMovieDetail(MovieResponse movie);
+
+        void showError(String message);
     }
 
 
     interface Presenter {
-        //TODO - Define presenter responsibility
+
+        void getMovie(int movieId);
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mac.zonemovies.data.remote.movieapi;
 
+import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
 
 import java.util.List;
@@ -33,5 +34,9 @@ public class MovieService {
                 defaultLanguage,
                 defaultPage
         );
+    }
+
+    public Observable<MovieResponse> getMovie(int movieId) {
+        return movieAPI.getMovie(movieId, API_KEY);
     }
 }
