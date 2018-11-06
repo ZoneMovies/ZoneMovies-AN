@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.mac.zonemovies.R;
 
-import javax.inject.Inject;
 public class StringManager {
 
     final Context context;

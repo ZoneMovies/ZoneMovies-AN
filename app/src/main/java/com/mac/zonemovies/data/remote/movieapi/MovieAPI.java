@@ -1,6 +1,7 @@
 package com.mac.zonemovies.data.remote.movieapi;
 
 import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.MovieVideosResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
 
 import io.reactivex.Observable;
@@ -21,4 +22,9 @@ public interface MovieAPI {
     //movie/335983?api_key=<<api_key>>
     @GET("movie/{movieId}")
     Observable<MovieResponse> getMovie(@Path("movieId") int movieId, @Query("api_key") String API_KEY);
+
+    //movie/{movie_id}/videos
+    @GET("movie/{movieId}/videos")
+    Observable<MovieVideosResponse> getMovieVideos(@Path("movieId") int movieId, @Query("api_key") String API_KEY);
+
 }

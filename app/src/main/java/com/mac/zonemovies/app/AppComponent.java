@@ -17,6 +17,7 @@ import dagger.Component;
 public interface AppComponent {
 
     Context appContext();
+    // enables the injection onto a subcomponent
     MovieService movieAPI();
     StringManager stringManager();
 

@@ -26,7 +26,9 @@
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.signup.SignUpActivity" />
         <activity android:name=".view.movie.MovieActivity" />
-        <activity android:name=".view.trailer.TrailerActivity"></activity>
+        <activity android:name=".view.trailer.TrailerActivity"
+                  android:screenOrientation="landscape"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>
