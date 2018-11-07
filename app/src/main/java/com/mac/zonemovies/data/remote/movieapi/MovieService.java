@@ -1,16 +1,12 @@
 package com.mac.zonemovies.data.remote.movieapi;
 
 import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.MovieVideosResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MovieService {
 
@@ -21,7 +17,6 @@ public class MovieService {
 
     private String defaultLanguage = "en";
     private int defaultPage = 1;
-
 
     @Inject
     public MovieService(MovieAPI movieAPI) {
@@ -39,4 +34,9 @@ public class MovieService {
     public Observable<MovieResponse> getMovie(int movieId) {
         return movieAPI.getMovie(movieId, API_KEY);
     }
+
+    public Observable<MovieVideosResponse> getMovieVideos(int movieId) {
+        return movieAPI.getMovieVideos(movieId, API_KEY);
+    }
+
 }

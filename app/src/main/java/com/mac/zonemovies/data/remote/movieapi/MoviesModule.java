@@ -1,8 +1,5 @@
 package com.mac.zonemovies.data.remote.movieapi;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -11,7 +8,7 @@ import retrofit2.Retrofit;
 public class MoviesModule {
 
     @Provides
-    MovieAPI provideMovieAPI(@Named("movies") Retrofit retrofit) {
+    MovieAPI provideMovieAPI(Retrofit retrofit) {
         return retrofit.create(MovieAPI.class);
     }
 

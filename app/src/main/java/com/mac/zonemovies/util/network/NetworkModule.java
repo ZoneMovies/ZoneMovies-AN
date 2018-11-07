@@ -1,7 +1,6 @@
 package com.mac.zonemovies.util.network;
 
 import com.mac.zonemovies.data.remote.movieapi.MovieAPI;
-import com.mac.zonemovies.data.remote.otherapi.OtherAPI;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -42,25 +41,11 @@ public class NetworkModule {
     }
 
     @Provides
-    @Named("movies")
     Retrofit provideMovieRetrofit(GsonConverterFactory gsonFactory,
                              RxJava2CallAdapterFactory rxJavaFactory,
                              OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(MovieAPI.BASE_URL)
-                .addConverterFactory(gsonFactory)
-                .addCallAdapterFactory(rxJavaFactory)
-                .client(okHttpClient)
-                .build();
-    }
-
-    @Provides
-    @Named("other")
-    Retrofit provideRetrofit(GsonConverterFactory gsonFactory,
-                             RxJava2CallAdapterFactory rxJavaFactory,
-                             OkHttpClient okHttpClient) {
-        return new Retrofit.Builder()
-                .baseUrl(OtherAPI.BASE_URL)
                 .addConverterFactory(gsonFactory)
                 .addCallAdapterFactory(rxJavaFactory)
                 .client(okHttpClient)
