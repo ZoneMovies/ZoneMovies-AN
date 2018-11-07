@@ -1,5 +1,6 @@
 package com.mac.zonemovies.data.remote.movieapi;
 
+import com.mac.zonemovies.BuildConfig;
 import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.MovieVideosResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
@@ -11,7 +12,7 @@ import io.reactivex.Observable;
 public class MovieService {
 
     //TODO - Extract API_KEY to GRADLE Properties
-    private static final String API_KEY = "3ea80361244dc8fe95edbe3b6afb4fd2";
+    private static final String API_KEY = BuildConfig.MovieApiKey;
 
     private MovieAPI movieAPI;
 

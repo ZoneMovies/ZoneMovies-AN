@@ -2,6 +2,7 @@ package com.mac.zonemovies.view.movie;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
+import com.mac.zonemovies.BuildConfig;
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
 import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
-import com.mac.zonemovies.view.trailer.TrailerActivity;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -20,6 +25,8 @@ public class MovieActivity extends AppCompatActivity
         implements MovieContract.View, View.OnClickListener {
 
     private static final String MOVIE_ID_EXTRA = "com.mac.zonemovies.view.movie.MOVIE_ID_EXTRA";
+    private static final int REQ_START_STANDALONE_PLAYER = 1;
+    private static final int REQ_RESOLVE_SERVICE_MISSING = 2;
 
     @Inject
     MoviePresenter moviePresenter;
@@ -27,6 +34,11 @@ public class MovieActivity extends AppCompatActivity
     private int movieId;
     private TextView movieTitle;
     private Button trailerButton;
+    private int startTimeMillis = 0;
+    private boolean autoplay = true;
+    private boolean lightboxMode = false;
+    private Intent intent;
+
 
     public static Intent startMovieActivity(Context context, int movieId) {
         Intent movieIntent = new Intent(context, MovieActivity.class);
@@ -69,6 +81,21 @@ public class MovieActivity extends AppCompatActivity
     }
 
     @Override
+    public void showVideo(String videoID) {
+        intent = YouTubeStandalonePlayer.createVideoIntent(
+                this, BuildConfig.YouTubeApiKey, videoID, startTimeMillis, autoplay, lightboxMode);
+        if (intent != null) {
+            if (canResolveIntent(intent)) {
+                startActivityForResult(intent, REQ_START_STANDALONE_PLAYER);
+            } else {
+                // Could not resolve the intent - must need to install or update the YouTube API service.
+                YouTubeInitializationResult.SERVICE_MISSING
+                        .getErrorDialog(this, REQ_RESOLVE_SERVICE_MISSING).show();
+            }
+        }
+    }
+
+    @Override
     public void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -77,7 +104,7 @@ public class MovieActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonTrailer:
-                startActivity(TrailerActivity.startTrailerActivity(this, movieId));
+                moviePresenter.getMovieVideos(movieId);
                 break;
         }
     }
@@ -94,5 +121,10 @@ public class MovieActivity extends AppCompatActivity
         } else {
             return savedInstanceState.getInt(MOVIE_ID_EXTRA, -1);
         }
+    }
+
+    private boolean canResolveIntent(Intent intent) {
+        List<ResolveInfo> resolveInfo = getPackageManager().queryIntentActivities(intent, 0);
+        return resolveInfo != null && !resolveInfo.isEmpty();
     }
 }
