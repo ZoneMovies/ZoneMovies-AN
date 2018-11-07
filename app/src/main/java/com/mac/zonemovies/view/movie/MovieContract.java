@@ -5,7 +5,10 @@ import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
 public interface MovieContract {
 
     interface View {
+
         void showMovieDetail(MovieResponse movie);
+
+        void showVideo(String videoID);
 
         void showError(String message);
     }
@@ -14,6 +17,8 @@ public interface MovieContract {
     interface Presenter {
 
         void getMovie(int movieId);
+
+        void getMovieVideos(int movieId);
 
     }
 

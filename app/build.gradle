@@ -11,6 +11,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "MovieApiKey", Movies_ApiKey
+            resValue 'string', "movie_api_key", Movies_ApiKey
+            buildConfigField 'String', "YouTubeApiKey", YouTube_ApiKey
+            resValue 'string', "youtube_api_key", YouTube_ApiKey
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -58,5 +64,7 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:${rootProject.ext.leakCanaryVersion}"
     // Logging
     implementation "com.jakewharton.timber:timber:${rootProject.ext.timberVersion}"
+    // Video playing
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 
 }
