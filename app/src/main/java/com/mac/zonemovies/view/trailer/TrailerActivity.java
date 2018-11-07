@@ -55,7 +55,6 @@ public class TrailerActivity extends AppCompatActivity implements TrailerContrac
     @Override
     public void showVideo(String videoUrl) {
         Log.d(TAG, "showVideo: " + videoUrl);
-        videoUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
