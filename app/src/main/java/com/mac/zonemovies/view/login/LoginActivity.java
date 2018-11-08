@@ -1,11 +1,11 @@
 package com.mac.zonemovies.view.login;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.mac.zonemovies.R;
+import com.mac.zonemovies.base.BaseActivity;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View {
+public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

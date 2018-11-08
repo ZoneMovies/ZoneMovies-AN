@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lbl_not_found">Movie not found</string>
     <string name="lbl_error">Something wrong happened</string>
+    <string name="loading">Loading...</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
 </resources>
