@@ -4,10 +4,11 @@
     <item android:drawable="@color/zoneOrange"/>
 
     <!-- Bitmap with our logo -->
-    <item>
-    <bitmap
+    <item
         android:gravity="center"
-        android:src="@drawable/ic_temp_logo"/>
+        android:width="150dp" android:height="90dp">
+        <bitmap android:gravity="fill_horizontal|fill_vertical"
+            android:src="@drawable/zman_logo"/>
     </item>
 
 </layer-list>

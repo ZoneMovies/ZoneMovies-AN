@@ -64,6 +64,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         moviesRecycler = findViewById(R.id.moviesRecycler);
         homeAdapter = new HomeAdapter(this);
         moviesRecycler.setAdapter(homeAdapter);
-        moviesRecycler.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        moviesRecycler.setLayoutManager(layoutManager);
     }
 }
