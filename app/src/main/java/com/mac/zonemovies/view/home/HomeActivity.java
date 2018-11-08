@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
+import com.mac.zonemovies.base.BaseActivity;
 import com.mac.zonemovies.data.remote.movieapi.to.Result;
 import com.mac.zonemovies.view.movie.MovieActivity;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class HomeActivity extends AppCompatActivity implements HomeContract.View {
+public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private static final String TAG = "HomeActivityTAG";
 

@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,18 +19,21 @@ import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.mac.zonemovies.BuildConfig;
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
+import com.mac.zonemovies.base.BaseActivity;
 import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
+import com.mac.zonemovies.view.signup.SignUpActivity;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class MovieActivity extends AppCompatActivity
+public class MovieActivity extends BaseActivity
         implements MovieContract.View, View.OnClickListener {
 
     private static final String MOVIE_ID_EXTRA = "com.mac.zonemovies.view.movie.MOVIE_ID_EXTRA";
     private static final int REQ_START_STANDALONE_PLAYER = 1;
     private static final int REQ_RESOLVE_SERVICE_MISSING = 2;
+    private static final String TAG = "MovieActivityTAG";
 
     @Inject
     MoviePresenter moviePresenter;
