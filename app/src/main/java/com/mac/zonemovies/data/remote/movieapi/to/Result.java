@@ -165,4 +165,8 @@ public class Result {
         return "https://image.tmdb.org/t/p/w500/"+posterPath;
     }
 
+    public String getUserVotePercentage() {
+        return String.valueOf(voteAverage * 10) + "%";
+    }
+
 }

@@ -1,8 +1,8 @@
 package com.mac.zonemovies.view.home;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +40,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Result result = results.get(position);
         viewHolder.movieTitle.setText(result.getTitle());
+        viewHolder.movieUserVote.setText(getFormattedVotePercentage(viewHolder.movieUserVote.getContext(),
+                                                                       result.getUserVotePercentage()));
         Picasso.get().load(result.getPosterURL()).into(viewHolder.moviePoster);
     }
 
@@ -57,14 +59,20 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    private String getFormattedVotePercentage(final Context context, String percentage) {
+        return context.getString(R.string.userVote, percentage);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView moviePoster;
         TextView movieTitle;
+        TextView movieUserVote;
 
         ViewHolder(View itemView) {
             super(itemView);
             moviePoster = itemView.findViewById(R.id.moviePoster);
             movieTitle = itemView.findViewById(R.id.movieTitle);
+            movieUserVote = itemView.findViewById(R.id.movieUserVote);
             itemView.setOnClickListener(this);
         }
 

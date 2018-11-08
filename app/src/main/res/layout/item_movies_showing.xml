@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/movieCard"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:layout_marginEnd="20dp"
+    android:layout_marginRight="20dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView
+        android:id="@+id/movieCard"
+        app:cardCornerRadius="@dimen/cardRadius"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/moviePoster"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             android:layout_width="wrap_content"
             android:layout_height="160dp" />
 
-        <TextView
-            android:id="@+id/movieTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_toEndOf="@+id/moviePoster"
-            android:layout_toRightOf="@+id/moviePoster"
-            android:textStyle="bold"
-            android:textSize="24sp" />
+    </android.support.v7.widget.CardView>
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/movieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="12"
+        android:ellipsize="end"
+        android:textColor="@color/zoneTextBlack"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-</android.support.v7.widget.CardView>
+    <TextView
+        android:id="@+id/movieUserVote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/zoneTextBlack"
+        android:textSize="12sp" />
+
+</LinearLayout>
