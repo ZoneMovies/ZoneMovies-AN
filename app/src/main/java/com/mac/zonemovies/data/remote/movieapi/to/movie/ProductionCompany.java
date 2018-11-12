@@ -1,5 +1,5 @@
 
-package com.mac.zonemovies.data.remote.movieapi.to;
+package com.mac.zonemovies.data.remote.movieapi.to.movie;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

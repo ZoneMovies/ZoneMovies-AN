@@ -1,9 +1,10 @@
 package com.mac.zonemovies.data.remote.movieapi;
 
 import com.mac.zonemovies.BuildConfig;
-import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
-import com.mac.zonemovies.data.remote.movieapi.to.MovieVideosResponse;
-import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.credits.CreditsResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.videos.MovieVideosResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.showing.NowShowingResponse;
 
 import javax.inject.Inject;
 
@@ -38,6 +39,10 @@ public class MovieService {
 
     public Observable<MovieVideosResponse> getMovieVideos(int movieId) {
         return movieAPI.getMovieVideos(movieId, API_KEY);
+    }
+
+    public Observable<CreditsResponse> getMovieCredits(int movieId) {
+        return movieAPI.getMovieCredits(movieId, API_KEY);
     }
 
 }

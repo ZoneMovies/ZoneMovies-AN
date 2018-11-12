@@ -2,7 +2,6 @@ package com.mac.zonemovies.view.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +10,7 @@ import android.util.Log;
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
 import com.mac.zonemovies.base.BaseActivity;
-import com.mac.zonemovies.data.remote.movieapi.to.Result;
+import com.mac.zonemovies.data.remote.movieapi.to.showing.Result;
 import com.mac.zonemovies.view.movie.MovieActivity;
 
 import java.util.List;

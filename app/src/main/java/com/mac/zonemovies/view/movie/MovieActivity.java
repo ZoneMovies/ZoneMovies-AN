@@ -3,12 +3,10 @@ package com.mac.zonemovies.view.movie;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,8 +18,8 @@ import com.mac.zonemovies.BuildConfig;
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
 import com.mac.zonemovies.base.BaseActivity;
-import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
-import com.mac.zonemovies.view.signup.SignUpActivity;
+import com.mac.zonemovies.data.remote.movieapi.to.credits.Cast;
+import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
 
 import java.util.List;
 
@@ -40,12 +38,8 @@ public class MovieActivity extends BaseActivity
 
     private int movieId;
     private TextView movieTitle;
-    private Button trailerButton;
-    private int startTimeMillis = 0;
-    private boolean autoplay = true;
-    private boolean lightboxMode = false;
-    private Intent intent;
-
+    private RecyclerView movieCast;
+    private CastAdapter castAdapter;
 
     public static Intent startMovieActivity(Context context, int movieId) {
         Intent movieIntent = new Intent(context, MovieActivity.class);
@@ -73,6 +67,7 @@ public class MovieActivity extends BaseActivity
            throw new RuntimeException("Invalid entry intent missing argument MOVIE_ID_EXTRA");
         } else {
             moviePresenter.getMovie(movieId);
+            moviePresenter.getMovieCredits(movieId);
         }
     }
 
@@ -89,17 +84,25 @@ public class MovieActivity extends BaseActivity
 
     @Override
     public void showVideo(String videoID) {
-        intent = YouTubeStandalonePlayer.createVideoIntent(
-                this, BuildConfig.YouTubeApiKey, videoID, startTimeMillis, autoplay, lightboxMode);
+        int startTimeMillis = 0;
+        Intent intent = YouTubeStandalonePlayer.createVideoIntent(
+                this, BuildConfig.YouTubeApiKey, videoID, startTimeMillis, true, false);
         if (intent != null) {
             if (canResolveIntent(intent)) {
                 startActivityForResult(intent, REQ_START_STANDALONE_PLAYER);
             } else {
                 // Could not resolve the intent - must need to install or update the YouTube API service.
-                YouTubeInitializationResult.SERVICE_MISSING
-                        .getErrorDialog(this, REQ_RESOLVE_SERVICE_MISSING).show();
+                YouTubeInitializationResult.SERVICE_MISSING.getErrorDialog(this, REQ_RESOLVE_SERVICE_MISSING).show();
             }
         }
+    }
+
+    @Override
+    public void showMovieCredits(List<Cast> cast) {
+        for(Cast castMember:cast) {
+            Log.d(TAG, "showMovieCredits: picture " + castMember.getProfilePath());
+        }
+        castAdapter.updateDataSet(cast);
     }
 
     @Override
@@ -118,8 +121,12 @@ public class MovieActivity extends BaseActivity
 
     private void initViews() {
         movieTitle = findViewById(R.id.movieTitle);
-        trailerButton = findViewById(R.id.buttonTrailer);
+        Button trailerButton = findViewById(R.id.buttonTrailer);
         trailerButton.setOnClickListener(this);
+        movieCast = findViewById(R.id.movieCast);
+        castAdapter = new CastAdapter();
+        movieCast.setAdapter(castAdapter);
+        movieCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 
     private int getMovieId(Bundle savedInstanceState) {

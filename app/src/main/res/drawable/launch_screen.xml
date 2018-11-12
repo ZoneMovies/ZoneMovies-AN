@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/zoneOrange"/>
+    <item android:drawable="@color/colorPrimary"/>
 
     <!-- Bitmap with our logo -->
     <item
         android:gravity="center"
-        android:width="150dp" android:height="90dp">
-        <bitmap android:gravity="fill_horizontal|fill_vertical"
+        android:width="150dp"
+        android:height="90dp">
+        <bitmap
+            android:gravity="fill_horizontal|fill_vertical"
             android:src="@drawable/zman_logo"/>
     </item>
 

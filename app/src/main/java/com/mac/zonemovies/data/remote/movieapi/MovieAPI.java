@@ -1,8 +1,9 @@
 package com.mac.zonemovies.data.remote.movieapi;
 
-import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
-import com.mac.zonemovies.data.remote.movieapi.to.MovieVideosResponse;
-import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.credits.CreditsResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.videos.MovieVideosResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.showing.NowShowingResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -26,5 +27,9 @@ public interface MovieAPI {
     //movie/{movie_id}/videos
     @GET("movie/{movieId}/videos")
     Observable<MovieVideosResponse> getMovieVideos(@Path("movieId") int movieId, @Query("api_key") String API_KEY);
+
+    //movie/{movie_id}/credits
+    @GET("movie/{movieId}/credits")
+    Observable<CreditsResponse> getMovieCredits(@Path("movieId") int movieId, @Query("api_key") String API_KEY);
 
 }
