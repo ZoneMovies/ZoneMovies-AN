@@ -1,4 +1,4 @@
-package com.mac.zonemovies.data.remote.movieapi.to.showing;
+package com.mac.zonemovies.data.remote.movieapi.to.common;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -168,5 +168,7 @@ public class Result {
     public String getUserVotePercentage() {
         return String.valueOf(voteAverage * 10) + "%";
     }
+
+    public String getBackdropURL() { return "https://image.tmdb.org/t/p/w700_and_h392_bestv2/" + backdropPath; }
 
 }

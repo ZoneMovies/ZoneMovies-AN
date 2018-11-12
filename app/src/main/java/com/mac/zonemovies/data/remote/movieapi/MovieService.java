@@ -3,6 +3,8 @@ package com.mac.zonemovies.data.remote.movieapi;
 import com.mac.zonemovies.BuildConfig;
 import com.mac.zonemovies.data.remote.movieapi.to.credits.CreditsResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.popular.PopularMoviesResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.upcoming.UpcomingResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.videos.MovieVideosResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.showing.NowShowingResponse;
 
@@ -12,13 +14,12 @@ import io.reactivex.Observable;
 
 public class MovieService {
 
-    //TODO - Extract API_KEY to GRADLE Properties
     private static final String API_KEY = BuildConfig.MovieApiKey;
+    private static final String DEFAULT_LANGUAGE = "en-US";
+    private static final String DEFAULT_REGION = "US";
+    private static final int DEFAULT_PAGE = 1;
 
     private MovieAPI movieAPI;
-
-    private String defaultLanguage = "en";
-    private int defaultPage = 1;
 
     @Inject
     public MovieService(MovieAPI movieAPI) {
@@ -28,8 +29,9 @@ public class MovieService {
     public Observable<NowShowingResponse> getMovieList() {
         return movieAPI.getMovies(
                 API_KEY,
-                defaultLanguage,
-                defaultPage
+                DEFAULT_LANGUAGE,
+                DEFAULT_PAGE,
+                DEFAULT_REGION
         );
     }
 
@@ -45,4 +47,21 @@ public class MovieService {
         return movieAPI.getMovieCredits(movieId, API_KEY);
     }
 
+    public Observable<PopularMoviesResponse> getPopularMovies() {
+        return movieAPI.getPopularMovies(
+                API_KEY,
+                DEFAULT_LANGUAGE,
+                DEFAULT_PAGE,
+                DEFAULT_REGION
+        );
+    }
+
+    public Observable<UpcomingResponse> getUpcomingMovies() {
+        return movieAPI.getUpcomingMovies(
+                API_KEY,
+                DEFAULT_LANGUAGE,
+                DEFAULT_PAGE,
+                DEFAULT_REGION
+        );
+    }
 }

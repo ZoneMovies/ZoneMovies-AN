@@ -1,4 +1,4 @@
-package com.mac.zonemovies.data.remote.movieapi.to.showing;
+package com.mac.zonemovies.data.remote.movieapi.to.upcoming;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.mac.zonemovies.data.remote.movieapi.to.common.Dates;
 import com.mac.zonemovies.data.remote.movieapi.to.common.Result;
 
-public class NowShowingResponse {
+public class UpcomingResponse {
 
     @SerializedName("results")
     @Expose

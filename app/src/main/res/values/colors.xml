@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#c37c00</color>
     <color name="colorAccent">#D81B60</color>
     <color name="zoneTextBlack">#07152A</color>
+    <color name="zoneWhite">#FFF</color>
 </resources>

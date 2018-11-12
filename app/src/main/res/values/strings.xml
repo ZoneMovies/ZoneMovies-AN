@@ -8,5 +8,6 @@
     <string name="logout">Logout</string>
     <string name="userVote">Score: %s</string>
     <string name="lbl_now_showing"><b><i>Now</i></b> Showing</string>
+    <string name="lbl_popular_movies"><b><i>Popular</i></b> Movies</string>
     <string name="lbl_show_all">See All</string>
 </resources>
