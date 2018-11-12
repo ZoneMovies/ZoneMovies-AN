@@ -45,6 +45,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/lbl_show_all"
+            android:textColor="@color/zoneLink"
             app:layout_constraintBottom_toTopOf="@+id/moviesShowingRecycler"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/upcomingRecycler" />
@@ -84,6 +85,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/lbl_show_all"
+            android:textColor="@color/zoneLink"
             app:layout_constraintBottom_toTopOf="@+id/popularMoviesRecycler"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/moviesShowingRecycler" />
