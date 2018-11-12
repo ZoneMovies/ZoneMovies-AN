@@ -1,22 +1,31 @@
 package com.mac.zonemovies.view.home;
 
-import com.mac.zonemovies.data.remote.movieapi.to.showing.Result;
+import com.mac.zonemovies.data.remote.movieapi.to.common.Result;
 
 import java.util.List;
 
 public interface HomeContract {
 
     interface View {
-        // TODO - Define view responsibility
-        void showMovies(List<Result> results );
+
+        void showNowShowingMovies(List<Result> nowShowingMovies );
+
+        void showPopularMovies(List<Result> popularMovies);
+
+        void showUpcomingMovies(List<Result> upcomingMovies);
 
         void navigateToMovie(int movieId);
     }
 
 
     interface Presenter {
-        //TODO - Define presenter responsibility
-        void getMovies();
+
+        void getNowShowingMovies();
+
+        void getPopularMovies();
+
+        void getUpcomingMovies();
+
     }
 
 }

@@ -9,8 +9,5 @@ import dagger.Component;
 public interface HomeComponent {
 
     void inject(HomeActivity homeActivity);
-//    void plus(HomeActivity homeActivity);
-//    void add(HomeActivity homeActivity);
-
 
 }

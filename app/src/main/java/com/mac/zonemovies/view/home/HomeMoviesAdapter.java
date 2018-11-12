@@ -1,7 +1,6 @@
 package com.mac.zonemovies.view.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,21 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mac.zonemovies.R;
-import com.mac.zonemovies.data.remote.movieapi.to.showing.Result;
-import com.mac.zonemovies.view.signup.SignUpActivity;
+import com.mac.zonemovies.data.remote.movieapi.to.common.Result;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
-
-    private static final String TAG = "HomeAdapter_TAG";
+public class HomeMoviesAdapter extends RecyclerView.Adapter<HomeMoviesAdapter.ViewHolder> {
 
     private final HomeContract.View homeView;
 
     private List<Result> results;
 
-    public HomeAdapter(HomeContract.View homeView) {
+    public HomeMoviesAdapter(HomeContract.View homeView) {
         this.homeView = homeView;
     }
 
@@ -34,7 +30,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView =
                 LayoutInflater.from(viewGroup.getContext())
-                        .inflate(R.layout.item_movies_showing, viewGroup, false);
+                        .inflate(R.layout.item_movies_home, viewGroup, false);
         return new ViewHolder(itemView);
     }
 

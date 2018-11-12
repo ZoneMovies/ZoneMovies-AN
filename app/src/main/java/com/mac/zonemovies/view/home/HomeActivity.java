@@ -10,7 +10,7 @@ import android.util.Log;
 import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
 import com.mac.zonemovies.base.BaseActivity;
-import com.mac.zonemovies.data.remote.movieapi.to.showing.Result;
+import com.mac.zonemovies.data.remote.movieapi.to.common.Result;
 import com.mac.zonemovies.view.movie.MovieActivity;
 
 import java.util.List;
@@ -21,8 +21,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private static final String TAG = "HomeActivityTAG";
 
-    private RecyclerView moviesRecycler;
-    private HomeAdapter homeAdapter;
+    private HomeMoviesAdapter homeShowingAdapter;
+    private HomeMoviesAdapter homePopularAdapter;
+    private HomeUpcomingMoviesAdapter homeUpcomingMoviesAdapter;
 
     @Inject
     HomePresenter homePresenter;
@@ -43,15 +44,27 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 .build()
                 .inject(this);
 
-        homePresenter.getMovies();
+        homePresenter.getNowShowingMovies();
+        homePresenter.getPopularMovies();
+        homePresenter.getUpcomingMovies();
     }
 
     @Override
-    public void showMovies(List<Result> results ) {
-        homeAdapter.updateDataSet(results);
-        for(Result movie:results) {
-            Log.d(TAG, "showMovies: " + movie.getPosterPath());
+    public void showNowShowingMovies(List<Result> nowShowingMovies) {
+        homeShowingAdapter.updateDataSet(nowShowingMovies);
+    }
+
+    @Override
+    public void showPopularMovies(List<Result> popularMovies) {
+        homePopularAdapter.updateDataSet(popularMovies);
+        for(Result result:popularMovies) {
+            Log.d(TAG, "showPopularMovies: " + result.getTitle());
         }
+    }
+
+    @Override
+    public void showUpcomingMovies(List<Result> upcomingMovies) {
+        homeUpcomingMoviesAdapter.updateDataSet(upcomingMovies);
     }
 
     @Override
@@ -60,10 +73,20 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     }
 
     private void initViews(){
-        moviesRecycler = findViewById(R.id.moviesRecycler);
-        homeAdapter = new HomeAdapter(this);
-        moviesRecycler.setAdapter(homeAdapter);
+        RecyclerView showingMoviesRecycler = findViewById(R.id.moviesShowingRecycler);
+        homeShowingAdapter = new HomeMoviesAdapter(this);
+        showingMoviesRecycler.setAdapter(homeShowingAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        moviesRecycler.setLayoutManager(layoutManager);
+        showingMoviesRecycler.setLayoutManager(layoutManager);
+
+        RecyclerView popularMoviesRecycler = findViewById(R.id.popularMoviesRecycler);
+        homePopularAdapter = new HomeMoviesAdapter(this);
+        popularMoviesRecycler.setAdapter(homePopularAdapter);
+        popularMoviesRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        RecyclerView upcomingMoviesRecycler = findViewById(R.id.upcomingRecycler);
+        homeUpcomingMoviesAdapter = new HomeUpcomingMoviesAdapter(this);
+        upcomingMoviesRecycler.setAdapter(homeUpcomingMoviesAdapter);
+        upcomingMoviesRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     }
 }
