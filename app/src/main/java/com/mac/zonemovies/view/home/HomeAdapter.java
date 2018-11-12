@@ -1,6 +1,7 @@
 package com.mac.zonemovies.view.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mac.zonemovies.R;
-import com.mac.zonemovies.data.remote.movieapi.to.Result;
+import com.mac.zonemovies.data.remote.movieapi.to.showing.Result;
+import com.mac.zonemovies.view.signup.SignUpActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

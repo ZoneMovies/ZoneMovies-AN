@@ -3,9 +3,10 @@ package com.mac.zonemovies.view.movie;
 import android.util.Log;
 
 import com.mac.zonemovies.data.remote.movieapi.MovieService;
-import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
-import com.mac.zonemovies.data.remote.movieapi.to.MovieVideosResponse;
-import com.mac.zonemovies.data.remote.movieapi.to.VideoResult;
+import com.mac.zonemovies.data.remote.movieapi.to.credits.CreditsResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.videos.MovieVideosResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.videos.VideoResult;
 import com.mac.zonemovies.util.resources.StringManager;
 
 import java.net.UnknownHostException;
@@ -80,6 +81,34 @@ public class MoviePresenter implements MovieContract.Presenter {
                             Log.d(TAG, "onNext: Vide url " + result.getKey());
                         }
                         movieView.showVideo(movieVideosResponse.getResults().get(0).getKey());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        handleError(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        // log analytics
+                    }
+                });
+    }
+
+    @Override
+    public void getMovieCredits(int movieId) {
+        movieService.getMovieCredits(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CreditsResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        //
+                    }
+
+                    @Override
+                    public void onNext(CreditsResponse creditsResponse) {
+                        movieView.showMovieCredits(creditsResponse.getCast());
                     }
 
                     @Override

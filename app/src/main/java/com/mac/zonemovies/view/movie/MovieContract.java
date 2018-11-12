@@ -1,16 +1,21 @@
 package com.mac.zonemovies.view.movie;
 
-import com.mac.zonemovies.data.remote.movieapi.to.MovieResponse;
+import com.mac.zonemovies.base.BaseView;
+import com.mac.zonemovies.data.remote.movieapi.to.credits.Cast;
+import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
+
+import java.util.List;
 
 public interface MovieContract {
 
-    interface View {
+    interface View extends BaseView {
 
         void showMovieDetail(MovieResponse movie);
 
         void showVideo(String videoID);
 
-        void showError(String message);
+        void showMovieCredits(List<Cast> cast);
+
     }
 
 
@@ -19,6 +24,8 @@ public interface MovieContract {
         void getMovie(int movieId);
 
         void getMovieVideos(int movieId);
+
+        void getMovieCredits(int movieId);
 
     }
 

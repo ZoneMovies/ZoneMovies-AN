@@ -1,6 +1,6 @@
 package com.mac.zonemovies.view.home;
 
-import com.mac.zonemovies.data.remote.movieapi.to.Result;
+import com.mac.zonemovies.data.remote.movieapi.to.showing.Result;
 
 import java.util.List;
 

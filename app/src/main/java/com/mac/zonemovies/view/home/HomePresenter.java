@@ -1,7 +1,7 @@
 package com.mac.zonemovies.view.home;
 
 import com.mac.zonemovies.data.remote.movieapi.MovieService;
-import com.mac.zonemovies.data.remote.movieapi.to.NowShowingResponse;
+import com.mac.zonemovies.data.remote.movieapi.to.showing.NowShowingResponse;
 
 import java.util.ArrayList;
 import java.util.List;
