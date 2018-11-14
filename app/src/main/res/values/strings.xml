@@ -3,11 +3,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lbl_not_found">Movie not found</string>
     <string name="lbl_error">Something wrong happened</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="userVote">Score: %s</string>
     <string name="lbl_now_showing"><b><i>Now</i></b> Showing</string>
     <string name="lbl_popular_movies"><b><i>Popular</i></b> Movies</string>
     <string name="lbl_show_all">See All</string>
+    <string name="lbl_overview"><b><i>Overview</i></b></string>
+    <string name="lbl_cast"><b><i>Cast</i></b></string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

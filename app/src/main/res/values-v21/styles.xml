@@ -3,6 +3,12 @@
 
     <style name="LauncherTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/launch_screen</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
+
+    <style name="Theme.Detail" parent="Base.Theme.Detail">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
 </resources>

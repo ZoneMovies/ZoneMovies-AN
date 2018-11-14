@@ -283,4 +283,6 @@ public class MovieResponse {
         this.voteCount = voteCount;
     }
 
+    public String getBackdropURL() { return "https://image.tmdb.org/t/p/w700_and_h392_bestv2/" + backdropPath; }
+
 }

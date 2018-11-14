@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#f99f00</color>
     <color name="colorPrimaryDark">#c37c00</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#2E15AC</color>
     <color name="zoneTextBlack">#07152A</color>
+    <color name="zoneTextOverview">#5E6979</color>
     <color name="zoneWhite">#FFF</color>
-    <color name="zoneLink">#2E15AC</color>
 </resources>

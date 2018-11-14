@@ -1,4 +1,4 @@
-package com.mac.zonemovies.util.analytics;
+package com.mac.zonemovies.helper.analytics;
 
 public class FirebaseAnalytics implements Analytics {
 }

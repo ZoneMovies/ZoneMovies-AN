@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".app.ZoneMoviesApp"
@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.home.HomeActivity"/>
+        <activity android:name=".view.home.HomeActivity" />
         <activity
             android:name=".view.splash.SplashActivity"
             android:theme="@style/LauncherTheme">
@@ -27,7 +27,15 @@
         <activity android:name=".view.onboarding.OnBoardingActivity" />
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.signup.SignUpActivity" />
-        <activity android:name=".view.movie.MovieActivity" />
+        <activity
+            android:name=".view.movie.MovieDetailActivity"
+            android:label="@string/title_activity_movie_detail"
+            android:parentActivityName=".view.home.HomeActivity"
+            android:theme="@style/Theme.Detail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mac.zonemovies.view.home.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

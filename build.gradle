@@ -37,6 +37,7 @@ ext {
     retrofitVersion = "2.4.0"
     okHttpVersion = "3.11.0"
     picassoVersion ="2.71828"
+    glideVersion = "4.8.0"
     dagger2Version = "2.18"
     rxJava2Version = "2.2.2"
     rxAndroidVersion = "2.1.0"

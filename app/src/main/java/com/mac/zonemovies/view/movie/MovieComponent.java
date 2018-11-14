@@ -8,6 +8,6 @@ import dagger.Component;
 @Component(dependencies = {AppComponent.class}, modules = {MovieModule.class})
 public interface MovieComponent {
 
-    void inject(MovieActivity movieActivity);
+    void inject(MovieDetailActivity movieActivity);
 
 }

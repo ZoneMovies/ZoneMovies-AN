@@ -1,4 +1,4 @@
-package com.mac.zonemovies.util.persistence;
+package com.mac.zonemovies.helper.persistence;
 
 import dagger.Module;
 

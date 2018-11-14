@@ -1,6 +1,7 @@
 
 package com.mac.zonemovies.data.remote.movieapi.to.credits;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -26,7 +27,13 @@ public class CreditsResponse {
     }
 
     public List<Cast> getCast() {
-        return cast;
+        List<Cast> filtered = new ArrayList<>();
+        for(Cast actor:cast) {
+            if(actor.getProfilePath()!=null) {
+                filtered.add(actor);
+            }
+        }
+        return filtered;
     }
 
     public void setCast(List<Cast> cast) {

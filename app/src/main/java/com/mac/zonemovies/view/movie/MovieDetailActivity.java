@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,29 +23,31 @@ import com.mac.zonemovies.app.ZoneMoviesApp;
 import com.mac.zonemovies.base.BaseActivity;
 import com.mac.zonemovies.data.remote.movieapi.to.credits.Cast;
 import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-public class MovieActivity extends BaseActivity
-        implements MovieContract.View, View.OnClickListener {
+public class MovieDetailActivity extends BaseActivity implements MovieContract.View, View.OnClickListener {
 
     private static final String MOVIE_ID_EXTRA = "com.mac.zonemovies.view.movie.MOVIE_ID_EXTRA";
     private static final int REQ_START_STANDALONE_PLAYER = 1;
     private static final int REQ_RESOLVE_SERVICE_MISSING = 2;
-    private static final String TAG = "MovieActivityTAG";
+    private static final String TAG = "MovieDetailActivityTAG";
 
-    @Inject
-    MoviePresenter moviePresenter;
+    @Inject MoviePresenter moviePresenter;
 
     private int movieId;
-    private TextView movieTitle;
-    private RecyclerView movieCast;
+
+    private Toolbar detailToolbar;
+    private CollapsingToolbarLayout collapsingToolbar;
+    private ImageView movieBackdrop;
+    private TextView movieOverview;
     private CastAdapter castAdapter;
 
-    public static Intent startMovieActivity(Context context, int movieId) {
-        Intent movieIntent = new Intent(context, MovieActivity.class);
+    public static Intent startMovieDetailActivity(Context context, int movieId) {
+        Intent movieIntent = new Intent(context, MovieDetailActivity.class);
         movieIntent.putExtra(MOVIE_ID_EXTRA, movieId);
         return movieIntent;
     }
@@ -50,11 +55,15 @@ public class MovieActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie);
+        setContentView(R.layout.activity_movie_detail);
 
         initViews();
 
-        // this is the bridge
+        setSupportActionBar(detailToolbar);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         DaggerMovieComponent.builder()
                 .appComponent(ZoneMoviesApp.getAppComponent())
                 .movieModule(new MovieModule(this))
@@ -63,8 +72,8 @@ public class MovieActivity extends BaseActivity
 
         movieId = getMovieId(savedInstanceState);
 
-        if(movieId<0) {
-           throw new RuntimeException("Invalid entry intent missing argument MOVIE_ID_EXTRA");
+        if (movieId < 0) {
+            throw new RuntimeException("Invalid entry intent missing argument MOVIE_ID_EXTRA");
         } else {
             moviePresenter.getMovie(movieId);
             moviePresenter.getMovieCredits(movieId);
@@ -79,7 +88,9 @@ public class MovieActivity extends BaseActivity
 
     @Override
     public void showMovieDetail(MovieResponse movie) {
-        movieTitle.setText(movie.getTitle());
+        Picasso.get().load(movie.getBackdropURL()).into(movieBackdrop);
+        collapsingToolbar.setTitle(movie.getTitle());
+        movieOverview.setText(movie.getOverview());
     }
 
     @Override
@@ -91,7 +102,6 @@ public class MovieActivity extends BaseActivity
             if (canResolveIntent(intent)) {
                 startActivityForResult(intent, REQ_START_STANDALONE_PLAYER);
             } else {
-                // Could not resolve the intent - must need to install or update the YouTube API service.
                 YouTubeInitializationResult.SERVICE_MISSING.getErrorDialog(this, REQ_RESOLVE_SERVICE_MISSING).show();
             }
         }
@@ -99,10 +109,10 @@ public class MovieActivity extends BaseActivity
 
     @Override
     public void showMovieCredits(List<Cast> cast) {
-        for(Cast castMember:cast) {
-            Log.d(TAG, "showMovieCredits: picture " + castMember.getProfilePath());
-        }
         castAdapter.updateDataSet(cast);
+        for(Cast actor:cast) {
+            Log.d(TAG, "showMovieCredits: path " + actor.getProfilePath());
+        }
     }
 
     @Override
@@ -112,25 +122,29 @@ public class MovieActivity extends BaseActivity
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.buttonTrailer:
+        switch (v.getId()) {
+            case R.id.fab:
                 moviePresenter.getMovieVideos(movieId);
                 break;
         }
     }
 
     private void initViews() {
-        movieTitle = findViewById(R.id.movieTitle);
-        Button trailerButton = findViewById(R.id.buttonTrailer);
-        trailerButton.setOnClickListener(this);
-        movieCast = findViewById(R.id.movieCast);
+        detailToolbar = findViewById(R.id.toolbar);
+        collapsingToolbar = findViewById(R.id.toolbar_layout);
+        movieBackdrop = findViewById(R.id.backdropBar);
+        movieOverview = findViewById(R.id.movieOverview);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        RecyclerView movieCast = findViewById(R.id.movieCast);
+        movieCast.setHasFixedSize(true);
         castAdapter = new CastAdapter();
         movieCast.setAdapter(castAdapter);
         movieCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        fab.setOnClickListener(this);
     }
 
     private int getMovieId(Bundle savedInstanceState) {
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             return getIntent().getIntExtra(MOVIE_ID_EXTRA, -1);
         } else {
             return savedInstanceState.getInt(MOVIE_ID_EXTRA, -1);
@@ -141,4 +155,5 @@ public class MovieActivity extends BaseActivity
         List<ResolveInfo> resolveInfo = getPackageManager().queryIntentActivities(intent, 0);
         return resolveInfo != null && !resolveInfo.isEmpty();
     }
+
 }

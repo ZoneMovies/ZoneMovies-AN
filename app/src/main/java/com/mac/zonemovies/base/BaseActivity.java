@@ -2,10 +2,7 @@ package com.mac.zonemovies.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,9 +14,6 @@ import com.mac.zonemovies.view.signup.SignUpActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private static final String TAG = "BaseActivityTAG";
-
-    @VisibleForTesting
     public ProgressDialog mProgressDialog;
 
     public void showProgressDialog() {
@@ -60,7 +54,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 startActivity(SignUpActivity.startSignUpActivity(this));
                 return true;
             case R.id.user_logout:
-                Log.d(TAG, "onOptionsItemSelected: logout ");
                 return false;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,9 +1,6 @@
-package com.mac.zonemovies.util.network;
+package com.mac.zonemovies.helper.network;
 
 import com.mac.zonemovies.data.remote.movieapi.MovieAPI;
-
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
