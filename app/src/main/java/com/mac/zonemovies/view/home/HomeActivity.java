@@ -11,7 +11,7 @@ import com.mac.zonemovies.R;
 import com.mac.zonemovies.app.ZoneMoviesApp;
 import com.mac.zonemovies.base.BaseActivity;
 import com.mac.zonemovies.data.remote.movieapi.to.common.Result;
-import com.mac.zonemovies.view.movie.MovieActivity;
+import com.mac.zonemovies.view.movie.MovieDetailActivity;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @Override
     public void navigateToMovie(int movieId) {
-        startActivity(MovieActivity.startMovieActivity(this, movieId));
+        startActivity(MovieDetailActivity.startMovieDetailActivity(this, movieId));
     }
 
     private void initViews(){

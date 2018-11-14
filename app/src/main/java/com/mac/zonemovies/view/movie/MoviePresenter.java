@@ -7,7 +7,7 @@ import com.mac.zonemovies.data.remote.movieapi.to.credits.CreditsResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.movie.MovieResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.videos.MovieVideosResponse;
 import com.mac.zonemovies.data.remote.movieapi.to.videos.VideoResult;
-import com.mac.zonemovies.util.resources.StringManager;
+import com.mac.zonemovies.helper.resources.StringManager;
 
 import java.net.UnknownHostException;
 

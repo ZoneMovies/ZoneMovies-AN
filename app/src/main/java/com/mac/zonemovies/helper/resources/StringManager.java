@@ -1,4 +1,4 @@
-package com.mac.zonemovies.util.resources;
+package com.mac.zonemovies.helper.resources;
 
 import android.content.Context;
 
